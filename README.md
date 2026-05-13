@@ -41,6 +41,8 @@ docker-compose up -d
 
 Starts PostgreSQL, the Spring Boot backend (port 8080), and the Vite dev server (port 5173) with hot reload. Flyway migrations run automatically on startup. Maven is bundled in the build image — no local Java or Maven install needed.
 
+> **Note:** This runs locally — stop the containers when you're done with `docker-compose stop` and restart them with `docker-compose start`. No need to keep Docker running 24/7 :)
+
 ### Option B — Run services individually
 
 **Prerequisites:** Node 20+, Java 21, Maven 3.9+
