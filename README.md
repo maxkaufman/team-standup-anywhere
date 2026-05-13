@@ -14,6 +14,7 @@ A full-stack async standup platform for remote teams. Team members submit daily 
 - **Team management** — create a team or join one via invite code; role-based access (Member / Lead)
 - **Standup history** — paginated personal standup log
 - **JWT authentication** — access + refresh token pair, stateless backend
+- **Claude - carrying my development :)
 
 ---
 
