@@ -1,0 +1,122 @@
+type Query {
+    # Auth
+    me: User!
+
+    # Team
+    team(id: ID!): Team!
+    myTeam: Team
+
+    # Standups
+    standups(teamId: ID!, date: String, limit: Int = 20, offset: Int = 0): [Standup!]!
+    myStandups(limit: Int = 20, offset: Int = 0): [Standup!]!
+    todayStandup: Standup
+
+    # Analytics
+    teamMoodTrend(teamId: ID!, days: Int = 30): [MoodDataPoint!]!
+    teamStats(teamId: ID!): TeamStats!
+}
+
+type Mutation {
+    # Auth
+    signUp(input: SignUpInput!): AuthPayload!
+    login(email: String!, password: String!): AuthPayload!
+    refreshToken(token: String!): AuthPayload!
+
+    # Team
+    createTeam(name: String!): Team!
+    joinTeam(inviteCode: String!): Team!
+    removeTeamMember(userId: ID!): Boolean!
+
+    # Standup
+    submitStandup(input: StandupInput!): Standup!
+    updateStandup(id: ID!, input: StandupInput!): Standup!
+    deleteStandup(id: ID!): Boolean!
+
+    # Profile
+    updateProfile(input: ProfileInput!): User!
+    generateAvatarUploadUrl(fileName: String!, contentType: String!): PresignedUrl!
+}
+
+# ── Types ──
+
+type User {
+    id: ID!
+    email: String!
+    name: String!
+    avatarUrl: String
+    role: Role!
+    team: Team
+    standups: [Standup!]!
+    createdAt: String!
+}
+
+enum Role {
+    MEMBER
+    LEAD
+    ADMIN
+}
+
+type Team {
+    id: ID!
+    name: String!
+    inviteCode: String!
+    members: [User!]!
+    standups(date: String): [Standup!]!
+    moodTrend(days: Int = 30): [MoodDataPoint!]!
+    stats: TeamStats!
+    createdAt: String!
+}
+
+type TeamStats {
+    avgMood: Float!
+    completionRate: Float!
+    blockerCount: Int!
+    totalStandups: Int!
+}
+
+type Standup {
+    id: ID!
+    author: User!
+    yesterday: String!
+    today: String!
+    blockers: String
+    mood: Int!
+    createdAt: String!
+}
+
+type MoodDataPoint {
+    date: String!
+    avgMood: Float!
+    count: Int!
+}
+
+type AuthPayload {
+    token: String!
+    refreshToken: String!
+    user: User!
+}
+
+type PresignedUrl {
+    uploadUrl: String!
+    fileUrl: String!
+}
+
+# ── Inputs ──
+
+input SignUpInput {
+    email: String!
+    password: String!
+    name: String!
+}
+
+input StandupInput {
+    yesterday: String!
+    today: String!
+    blockers: String
+    mood: Int!
+}
+
+input ProfileInput {
+    name: String
+    avatarUrl: String
+}
