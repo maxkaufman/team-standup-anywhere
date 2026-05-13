@@ -138,13 +138,3 @@ standups   id, author_id, team_id, yesterday, today, blockers, mood (1-5), creat
 
 Indexes on `standups(team_id, created_at)` for fast dashboard queries.
 
----
-
-## Configuration
-
-| Variable | Description |
-|---|---|
-| `JWT_SECRET` | HS256 signing key (min 256-bit) |
-| `DB_HOST` / `DB_NAME` / `DB_USERNAME` / `DB_PASSWORD` | PostgreSQL connection |
-
-Locally these default to H2 and dev values defined in `application.yml`. For a Postgres-backed local run, set them in your environment or use docker-compose.
