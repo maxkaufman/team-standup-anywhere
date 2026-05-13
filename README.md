@@ -14,7 +14,6 @@ A full-stack async standup platform for remote teams. Team members submit daily 
 - **Team management** — create a team or join one via invite code; role-based access (Member / Lead)
 - **Standup history** — paginated personal standup log
 - **JWT authentication** — access + refresh token pair, stateless backend
-- **Claude** - carrying my development :)
 
 ---
 
@@ -27,6 +26,7 @@ A full-stack async standup platform for remote teams. Team members submit daily 
 | Database | PostgreSQL 16 (H2 in-memory for local dev) |
 | Auth | JWT (JJWT 0.12) — access token (24h) + refresh token (7d) |
 | Containers | Docker, docker-compose |
+| AI | $20 Claude Code Membership - dev workhorse |
 
 ---
 
